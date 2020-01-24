@@ -19,22 +19,46 @@ module.exports = async function() {
             timestamps: false // For less clutter in the SSCCE
         }
     });
-    const Post = sequelize.define('Post', { foo: DataTypes.STRING });
-    const Comment = sequelize.define('Comment', { bar: DataTypes.STRING });
-    Post.hasMany(Comment, { as: 'comments' });
 
-    await sequelize.sync();
+    // const Post = sequelize.define('Post', { foo: DataTypes.STRING });
+    // const Comment = sequelize.define('Comment', { bar: DataTypes.STRING });
+    // Post.hasMany(Comment, { as: 'comments' });
 
-    log(await Post.findAll({
+    // await sequelize.sync();
+
+    // log(await Post.findAll({
+    //     attributes: [],
+    //     include: [
+    //         {
+    //             model: Comment,
+    //             as: 'comments',
+    //             attributes: [
+    //                 [Sequelize.fn('COUNT', Sequelize.col('comments.id')), 'commentCount']
+    //             ]
+    //         }
+    //     ]
+    // }));
+
+    const Post = sequelize.define('Post', { title: DataTypes.STRING });
+    const Comment = sequelize.define('Comment', { content: DataTypes.TEXT });
+    Post.Comments = Post.hasMany(Comment, { as: 'comments' });
+    await sequelize.sync({ force: true });
+    await Post.create({
+        title: Math.random().toString(),
+        comments: [
+            { content: Math.random().toString() },
+            { content: Math.random().toString() },
+            { content: Math.random().toString() }
+        ]
+    }, { include: [Post.Comments] });
+    await Post.findAll({
         attributes: [],
         include: [
-            {
-                model: Comment,
-                as: 'comments',
-                attributes: [
-                    [Sequelize.fn('COUNT', Sequelize.col('comments.id')), 'commentCount']
-                ]
-            }
-        ]
-    }));
+          {
+            association: Post.Comments,
+            attributes: [[sequelize.fn('COUNT', sequelize.col('comments.id')), 'commentCount']]
+          }
+        ],
+        raw: true
+    });
 };

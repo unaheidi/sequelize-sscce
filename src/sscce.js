@@ -19,7 +19,22 @@ module.exports = async function() {
             timestamps: false // For less clutter in the SSCCE
         }
     });
-    const Foo = sequelize.define('Foo', { name: DataTypes.TEXT });
+    const Post = sequelize.define('Post', { foo: DataTypes.STRING });
+    const Comment = sequelize.define('Comment', { bar: DataTypes.STRING });
+    Post.hasMany(Comment, { as: 'comments' });
+
     await sequelize.sync();
-    log(await Foo.create({ name: 'foo' }));
+
+    log(await Post.findAll({
+        attributes: [],
+        include: [
+            {
+                model: Comment,
+                as: 'comments',
+                attributes: [
+                    [Sequelize.fn('COUNT', Sequelize.col('comments.id')), 'commentCount']
+                ]
+            }
+        ]
+    }));
 };

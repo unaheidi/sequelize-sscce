@@ -59,6 +59,6 @@ module.exports = async function() {
             attributes: [[sequelize.fn('COUNT', sequelize.col('comments.id')), 'commentCount']]
           }
         ],
-        raw: true
+        // raw: true
     });
 };

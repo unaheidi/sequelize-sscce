@@ -11,17 +11,10 @@
     "chalk": "^2",
     "cross-env": "^5",
     "fs-jetpack": "^2",
-    "is-plain-object": "^3.0.0",
-    "json-stringify-safe": "^5.0.1",
-    "lodash.defaults": "^4.2.0",
-    "mariadb": "^2",
-    "mysql2": "^1",
-    "pg": "^7",
-    "pg-hstore": "^2",
-    "pg-types": "^2",
-    "sequelize": "^5",
-    "sqlite3": "^4",
-    "tedious": "^6"
+    "is-plain-object": "^3",
+    "json-stringify-safe": "^5",
+    "lodash.defaults": "^4",
+    "sequelize": "^5"
   },
   "scripts": {
     "start": "cross-env LOCAL_SSCCE=true DIALECT=sqlite node setup/runner.js",
@@ -31,6 +24,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
+    "sqlite3": "^4",
     "eslint": "^6",
     "eslint-plugin-node": "^10"
   }

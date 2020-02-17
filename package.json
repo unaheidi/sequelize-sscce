@@ -18,14 +18,24 @@
   },
   "scripts": {
     "start": "cross-env LOCAL_SSCCE=true DIALECT=sqlite node setup/runner.js",
+    "ts-prep": "del-cli ts-dist && tsc && node setup/ts-setup.js",
+    "ts": "npm run ts-prep && cross-env USE_TS=true npm start",
     "do-replace": "node setup/lib-replacements.js --do",
     "undo-replace": "node setup/lib-replacements.js --undo",
     "ci": "node setup/runner.js",
     "lint": "eslint ."
   },
   "devDependencies": {
-    "sqlite3": "^4",
+    "@sindresorhus/tsconfig": "0.7.0",
+    "@types/bluebird": "*",
+    "@types/node": "^10",
+    "@types/validator": "*",
+    "@typescript-eslint/eslint-plugin": "2.16.0",
+    "@typescript-eslint/parser": "2.16.0",
+    "del-cli": "^3",
     "eslint": "^6",
-    "eslint-plugin-node": "^10"
+    "eslint-plugin-node": "^10",
+    "sqlite3": "^4",
+    "typescript": "3.7.5"
   }
 }

@@ -21,3 +21,7 @@ elif [ $MYSQL_VER ]; then
 elif [ $POSTGRES_VER ]; then
     docker run --link ${POSTGRES_VER}:db -e CHECK_PORT=5432 -e CHECK_HOST=db --net sequelizesscce_default giorgos/takis;
 fi
+
+if [ $USE_TS ]; then
+    npm run ts-prep;
+fi

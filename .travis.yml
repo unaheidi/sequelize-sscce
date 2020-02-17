@@ -8,7 +8,7 @@ cache: npm
 install:
   - npm i -g npm@latest
   - npm i --production
-  - /bin/bash ./setup/install-dialect.sh
+  - . ./setup/install-dialect.sh
 
 env:
   global:
@@ -31,21 +31,18 @@ script:
 
 jobs:
   include:
-    - stage: test
+    - name: sqlite
       node_js: '10'
       env: DIALECT=sqlite
-    - stage: test
-      node_js: '10'
-      sudo: required
-      env: MARIADB_VER=mariadb-103 SEQ_MARIADB_PORT=8960 DIALECT=mariadb
-    - stage: test
+    - name: mysql
       node_js: '10'
       sudo: required
       env: MYSQL_VER=mysql-57 SEQ_MYSQL_PORT=8980 DIALECT=mysql
-    - stage: test
+    - name: mariadb
+      node_js: '10'
+      sudo: required
+      env: MARIADB_VER=mariadb-103 SEQ_MARIADB_PORT=8960 DIALECT=mariadb
+    - name: postgres
       node_js: '10'
       sudo: required
       env: POSTGRES_VER=postgres-10 SEQ_PG_PORT=8991 DIALECT=postgres
-
-stages:
-  - test

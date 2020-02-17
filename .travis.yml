@@ -7,7 +7,6 @@ cache: npm
 
 install:
   - npm i -g npm@latest
-  - npm i --production
 
 env:
   global:

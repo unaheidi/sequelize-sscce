@@ -26,24 +26,34 @@ jobs:
   include:
     - name: sqlite
       node_js: '10'
-      env: 
-        - DIALECT=sqlite
-        - DIALECT=sqlite USE_TS=true
+      env: DIALECT=sqlite
+    - name: TS sqlite
+      node_js: '10'
+      env: DIALECT=sqlite USE_TS=true
+
     - name: mysql
       node_js: '10'
       sudo: required
-      env:
-        - MYSQL_VER=mysql-57 SEQ_MYSQL_PORT=8980 DIALECT=mysql
-        - MYSQL_VER=mysql-57 SEQ_MYSQL_PORT=8980 DIALECT=mysql USE_TS=true
+      env: MYSQL_VER=mysql-57 SEQ_MYSQL_PORT=8980 DIALECT=mysql
+    - name: TS mysql
+      node_js: '10'
+      sudo: required
+      env: MYSQL_VER=mysql-57 SEQ_MYSQL_PORT=8980 DIALECT=mysql USE_TS=true
+
     - name: mariadb
       node_js: '10'
       sudo: required
-      env:
-        - MARIADB_VER=mariadb-103 SEQ_MARIADB_PORT=8960 DIALECT=mariadb
-        - MARIADB_VER=mariadb-103 SEQ_MARIADB_PORT=8960 DIALECT=mariadb USE_TS=true
+      env: MARIADB_VER=mariadb-103 SEQ_MARIADB_PORT=8960 DIALECT=mariadb
+    - name: TS mariadb
+      node_js: '10'
+      sudo: required
+      env: MARIADB_VER=mariadb-103 SEQ_MARIADB_PORT=8960 DIALECT=mariadb USE_TS=true
+
     - name: postgres
       node_js: '10'
       sudo: required
-      env:
-        - POSTGRES_VER=postgres-10 SEQ_PG_PORT=8991 DIALECT=postgres
-        - POSTGRES_VER=postgres-10 SEQ_PG_PORT=8991 DIALECT=postgres USE_TS=true
+      env: POSTGRES_VER=postgres-10 SEQ_PG_PORT=8991 DIALECT=postgres
+    - name: TS postgres
+      node_js: '10'
+      sudo: required
+      env: POSTGRES_VER=postgres-10 SEQ_PG_PORT=8991 DIALECT=postgres USE_TS=true

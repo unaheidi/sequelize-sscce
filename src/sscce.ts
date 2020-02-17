@@ -28,5 +28,5 @@ export async function run() {
 
     await sequelize.sync();
 
-    log(await Foo.create({ name: 'fooooooo' }));
+    log(await Foo.create({ name: 'TS foo' }));
 }
